@@ -1,0 +1,105 @@
+﻿<s:SurfaceWindow x:Class="ContinuousList.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="ContinuousList"
+    xmlns:local="clr-namespace:ContinuousList">
+    <s:SurfaceWindow.Resources>
+        <ImageBrush 
+          x:Key="WindowBackground" 
+          Stretch="None" Opacity="0.6" ImageSource="/ContinuousList;component/Images/WindowBackground.jpg" />                   
+
+        <DataTemplate x:Key="ListBoxTemplate">
+            <Border BorderBrush="#30000000" BorderThickness="2" CornerRadius="22" Background="#30000000" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border BorderBrush="White" BorderThickness="3" CornerRadius="20" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid>
+                        <Border Name="mask" Background="White" CornerRadius="18"/>
+                        <Image Source="{Binding}" Height="170" Width="170" Stretch="Fill">
+                            <Image.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=mask}"/>
+                            </Image.OpacityMask>
+                        </Image>
+                    </Grid>
+                </Border>
+            </Border>
+        </DataTemplate>
+    </s:SurfaceWindow.Resources>
+
+    <Canvas Background="{StaticResource WindowBackground}" >
+        <Rectangle Canvas.Left="128" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="256" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="384" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="512" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="640" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="768" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="896" Canvas.Top="0" Width="1" Height="800" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+
+        <Rectangle Canvas.Left="0" Canvas.Top="96" Width="1024" Height="1" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="192" Width="1024" Height="1" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="288" Width="1024" Height="1" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="384" Width="1024" Height="1" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="480" Width="1024" Height="1" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="576" Width="1024" Height="1" Fill="Black" Stroke="#000000" StrokeThickness="1" />
+        <Rectangle Canvas.Left="0" Canvas.Top="672" Width="1024" Height="1" Fill="Black" Stroke="#444444" StrokeThickness="1" />
+
+        <Rectangle Canvas.Left="0" Canvas.Top="0" Width="768" Height="192" Fill="#8080FF80" Stroke="#FF0000" StrokeThickness="1" />
+        <s:SurfaceListBox Name="list1" Canvas.Left="0" Canvas.Top="0" Width="768" Height="192" ItemTemplate="{DynamicResource ListBoxTemplate}" ItemsSource="{Binding Path=datalist1}">
+            <s:SurfaceListBox.Template>
+                <ControlTemplate>
+                    <s:SurfaceScrollViewer CanContentScroll="True" 
+                                           HorizontalScrollBarVisibility="Hidden"
+                                           VerticalScrollBarVisibility="Disabled">
+                        <local:CarouselPanel Loaded="List1Panel_Loaded" IsItemsHost="True" isVertical="false" />
+                    </s:SurfaceScrollViewer>
+                </ControlTemplate>
+            </s:SurfaceListBox.Template>
+        </s:SurfaceListBox>
+
+        <Rectangle Canvas.Left="768" Canvas.Top="0" Width="256" Height="768" Fill="#8080FFFF" Stroke="#FF0000" StrokeThickness="1" />
+        <s:SurfaceListBox Name="list3" Canvas.Left="768" Canvas.Top="0" Width="256" Height="768" ItemTemplate="{DynamicResource ListBoxTemplate}" ItemsSource="{Binding Path=datalist3}">
+            <s:SurfaceListBox.Template>
+                <ControlTemplate>
+                    <s:SurfaceScrollViewer CanContentScroll="True" 
+                                           HorizontalScrollBarVisibility="Disabled"
+                                           VerticalScrollBarVisibility="Hidden">
+                        <local:CarouselPanel x:Name="list3panel" Loaded="List3Panel_Loaded" IsItemsHost="True" isVertical="True" />
+                    </s:SurfaceScrollViewer>
+                </ControlTemplate>
+            </s:SurfaceListBox.Template>
+        </s:SurfaceListBox>
+
+        <Rectangle Canvas.Left="0" Canvas.Top="576" Width="768" Height="192" Fill="#80FF8080" Stroke="#FF0000" StrokeThickness="1" />
+        <s:SurfaceListBox Name="list2" Canvas.Left="0" Canvas.Top="576" Width="768" Height="200"  ItemTemplate="{DynamicResource ListBoxTemplate}" ItemsSource="{Binding Path=datalist2}">
+            <s:SurfaceListBox.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#00FFFFFF" Offset="0" />
+                    <GradientStop Color="#FFFFFFFF" Offset="0.1" />
+                    <GradientStop Color="#FFFFFFFF" Offset="0.9" />
+                    <GradientStop Color="#00FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+            </s:SurfaceListBox.OpacityMask>
+            <s:SurfaceListBox.Template>
+                <ControlTemplate>
+                    <s:SurfaceScrollViewer CanContentScroll="True" 
+                                           HorizontalScrollBarVisibility="Hidden"
+                                           VerticalScrollBarVisibility="Disabled">
+                        <local:LoopingPanel Loaded="List2Panel_Loaded" x:Name="list2panel" IsItemsHost="True" isVertical="False" />
+                    </s:SurfaceScrollViewer>
+                </ControlTemplate>
+            </s:SurfaceListBox.Template>
+        </s:SurfaceListBox>
+
+        <s:SurfaceButton x:Name="List1Add" Background="#8080FF80" Canvas.Top="196" Canvas.Left="727" Width="35" FontSize="14" Padding="0,0,0,0" Click="List1Add_Click" Height="30">+</s:SurfaceButton>
+        <s:SurfaceButton x:Name="List1Del" Background="#8080FF80" Canvas.Top="196" Canvas.Left="686" Width="35" FontSize="14" Padding="0,0,0,0" Click="List1Del_Click" Height="30">-</s:SurfaceButton>
+
+        <s:SurfaceButton x:Name="List3Add" Background="#8080FFFF" Canvas.Top="386" Canvas.Left="727" Width="35" FontSize="14" Padding="0,0,0,0" Click="List3Add_Click" Height="30">+</s:SurfaceButton>
+        <s:SurfaceButton x:Name="List3Del" Background="#8080FFFF" Canvas.Top="350" Canvas.Left="727" Width="35" FontSize="14" Padding="0,0,0,0" Click="List3Del_Click" Height="30">-</s:SurfaceButton>
+
+        <s:SurfaceButton x:Name="List2Add" Background="#80FF8080" Canvas.Top="540" Canvas.Left="727" Width="35" FontSize="14" Padding="0,0,0,0" Click="List2Add_Click" Height="30">+</s:SurfaceButton>
+        <s:SurfaceButton x:Name="List2Del" Background="#80FF8080" Canvas.Top="540" Canvas.Left="686" Width="35" FontSize="14" Padding="0,0,0,0" Click="List2Del_Click" Height="30">-</s:SurfaceButton>
+
+        <Label Canvas.Left="655" Canvas.Top="196" Name="label1" ></Label>
+        <Label Canvas.Left="655" Canvas.Top="540" Name="label2" ></Label>
+        <Label Canvas.Left="730" Canvas.Top="420" Name="label3" ></Label>
+    </Canvas>
+</s:SurfaceWindow>
